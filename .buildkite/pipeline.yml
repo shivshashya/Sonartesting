@@ -1,0 +1,14 @@
+env:
+  AWS_REGION: ap-south-1
+  AWS_DEFAULT_REGION: ap-south-1
+  NODE_OPTIONS: --max_old_space_size=2500
+
+steps:
+  - label: ':hammer: Build'
+    commands: |
+      yarn install
+      CI=false yarn build
+      DRY_RUN=1 ./deploy/deploy.sh
+    agents:
+      queue: default
+
